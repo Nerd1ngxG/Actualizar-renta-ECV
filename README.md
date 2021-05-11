@@ -1,2 +1,10 @@
 # Actualizar-renta-ECV
-Generar conjunto donde la renta de los hogares de la muestra de la ECV corresponde al año en el que se realiza la encuesta y no al año anterior como es por defecto
+Generar conjunto de datos donde la renta de los hogares de la muestra de la ECV corresponde al año en el que se realiza la encuesta y no al año anterior como es por defecto en los datos que ofrece el INE
+
+
+
+Utilizando los ficheros longitudinales y transversales de la ECV creamos un conjunto de datos para cada año donde la principal variable de interés será la variable renta asignada correctamente al año en el que se realiza la encuesta. Por defecto los microdatos que ofrece el INE tienen diversas variables monetarias que se extraen de ficheros de Hacienda. Sin embargo estas variables ofrecen información de la renta generada el año anterior al que se realiza la encuesta, por lo que conlleva dificultades a la hora de querer analizar si un cambio en una política pública o el nacimiento de un hijo en X año tuvo algún impacto en la renta generada.
+
+Para conseguir esta variable renta 'laggeada' lo que hacemos es descargar todos los datos longitudinales que ofrece el INE en el que cada hogar participa/aparece durante cuatro años consecutivos, a coste de reducir la muestra final podemos conseguir datos más precisos. Por lo tanto la idea es juntar todas las observaciones de los datos longitudinales y agrupando por hogares asignar la variable renta que aparece en el año siguiente. Por ejemplo, en el fichero de 2011 se que ofrece información de la renta generada por el hogar pero en el año 2010, por lo tanto lo que hacemos es acudir a los datos del mismo hogar del año 2011, obtenemos la variable renta y la asignamos la variable renta que había en 2010 y así sucesivamente con el resto de años. El resultado es un dataframe para cada año con los identificadores de los ficheros longitudinales y su homólogos de los ficheros transversales (cada observación representando al mismo hogar en ambos tipos de ficheros),la variable con el año de la encuesta y finalmente la renta correspondiente al año natural en el que completó la encuesta.
+
+El impacto en la muestra es la reducción en un 40% de las observaciones registradas en los ficheros transversales.
